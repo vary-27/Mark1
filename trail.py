@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 import spacy.cli
 from spacy.cli import download
-spacy.cli.download("en_core_web_sm")
+#spacy.cli.download("en_core_web_sm")
 
 # Suppress specific warnings
 warnings.filterwarnings("ignore", category=UserWarning)
