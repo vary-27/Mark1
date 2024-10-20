@@ -29,8 +29,13 @@ def download_and_unzip_model(url, model_name):
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extractall(model_name)
 
+    # Check if meta.json exists
+    if not os.path.isfile(os.path.join(model_name, "meta.json")):
+        raise FileNotFoundError(f"meta.json not found in {model_name} directory.")
+
     # Remove the zip file after extraction
     os.remove(zip_file_path)
+
 
 # URL to your zip file on GitHub
 model_url = "https://github.com/vary-27/Mark1/raw/main/en_core_web_sm.zip"
