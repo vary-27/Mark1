@@ -17,8 +17,14 @@ spacy.cli.download("en_core_web_sm")
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
+try:
+    nlp = spacy.load('en_core_web_sm')
+except OSError:
+    spacy.cli.download("en_core_web_sm")
+    nlp = spacy.load('en_core_web_sm')
+
 # Initialize spaCy model and Whisper model
-nlp = spacy.load('en_core_web_sm')
+#nlp = spacy.load('en_core_web_sm')
 model = whisper.load_model("base")
 
 # Stopwords for summarization
