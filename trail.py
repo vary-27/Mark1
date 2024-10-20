@@ -4,8 +4,6 @@ import yt_dlp
 import whisper
 import spacy
 import os
-import zipfile
-import requests
 from string import punctuation as punct
 from spacy.lang.en.stop_words import STOP_WORDS
 from heapq import nlargest
@@ -14,36 +12,8 @@ from heapq import nlargest
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-# Function to download and unzip the model
-def download_and_unzip_model(url, model_name):
-    zip_file_path = f"{model_name}.zip"
-    
-    # Download the zip file
-    response = requests.get(url)
-    with open(zip_file_path, 'wb') as f:
-        f.write(response.content)
-
-    # Unzip the file
-    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-        zip_ref.extractall(model_name)
-
-    # Check the contents of the extracted directory
-    extracted_files = os.listdir(model_name)
-    st.write(f"Extracted files: {extracted_files}")  # Display extracted files for debugging
-
-    # Check if meta.json exists
-    if not os.path.isfile(os.path.join(model_name, "meta.json")):
-        raise FileNotFoundError(f"meta.json not found in {model_name} directory.")
-
-    # Remove the zip file after extraction
-    os.remove(zip_file_path)
-
-# Download and unzip the spaCy model
-model_url = "https://github.com/vary-27/Mark1/raw/main/en_core_web_sm.zip"
-download_and_unzip_model(model_url, "en_core_web_sm")
-
-# Load the spaCy model
-nlp = spacy.load('en_core_web_sm')
+# Load the spaCy model from the path where you uploaded it
+nlp = spacy.load('./en_core_web_sm')  # Ensure this points to the folder containing your model files
 
 # Initialize Whisper model
 model = whisper.load_model("base")
@@ -162,4 +132,5 @@ st.markdown("""
 
 Feel free to test it out with different video links!
 """)
+
 
