@@ -9,6 +9,10 @@ from spacy.lang.en.stop_words import STOP_WORDS
 from heapq import nlargest
 import numpy as np
 import pandas as pd
+
+import spacy.cli
+spacy.cli.download("en_core_web_sm")
+
 # Suppress specific warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
