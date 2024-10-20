@@ -9,18 +9,39 @@ from spacy.lang.en.stop_words import STOP_WORDS
 from heapq import nlargest
 import numpy as np
 import pandas as pd
-import spacy.cli
-from spacy.cli import download
-#spacy.cli.download("en_core_web_sm")
+import zipfile
+import requests
 
 # Suppress specific warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
+
+# Function to download and unzip the model
+def download_and_unzip_model(url, model_name):
+    zip_file_path = f"{model_name}.zip"
+    
+    # Download the zip file
+    response = requests.get(url)
+    with open(zip_file_path, 'wb') as f:
+        f.write(response.content)
+
+    # Unzip the file
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extractall(model_name)
+
+    # Remove the zip file after extraction
+    os.remove(zip_file_path)
+
+# URL to your zip file on GitHub
+model_url = "https://github.com/vary-27/Mark1/raw/main/en_core_web_sm.zip"
+
+# Download and unzip the model
+download_and_unzip_model(model_url, "en_core_web_sm")
+
+# Load the spaCy model
 nlp = spacy.load('en_core_web_sm')
 
-
-# Initialize spaCy model and Whisper model
-#nlp = spacy.load('en_core_web_sm')
+# Initialize Whisper model
 model = whisper.load_model("base")
 
 # Stopwords for summarization
