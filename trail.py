@@ -4,13 +4,11 @@ import yt_dlp
 import whisper
 import spacy
 import os
+import zipfile
+import requests
 from string import punctuation as punct
 from spacy.lang.en.stop_words import STOP_WORDS
 from heapq import nlargest
-import numpy as np
-import pandas as pd
-import zipfile
-import requests
 
 # Suppress specific warnings
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -36,11 +34,8 @@ def download_and_unzip_model(url, model_name):
     # Remove the zip file after extraction
     os.remove(zip_file_path)
 
-
-# URL to your zip file on GitHub
+# Download and unzip the spaCy model
 model_url = "https://github.com/vary-27/Mark1/raw/main/en_core_web_sm.zip"
-
-# Download and unzip the model
 download_and_unzip_model(model_url, "en_core_web_sm")
 
 # Load the spaCy model
@@ -163,3 +158,4 @@ st.markdown("""
 
 Feel free to test it out with different video links!
 """)
+
