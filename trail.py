@@ -27,6 +27,10 @@ def download_and_unzip_model(url, model_name):
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extractall(model_name)
 
+    # Check the contents of the extracted directory
+    extracted_files = os.listdir(model_name)
+    st.write(f"Extracted files: {extracted_files}")  # Display extracted files for debugging
+
     # Check if meta.json exists
     if not os.path.isfile(os.path.join(model_name, "meta.json")):
         raise FileNotFoundError(f"meta.json not found in {model_name} directory.")
