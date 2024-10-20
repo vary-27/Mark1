@@ -1,3 +1,4 @@
+requests
 streamlit
 yt-dlp
 whisper
