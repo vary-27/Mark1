@@ -12,8 +12,16 @@ from heapq import nlargest
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-# Load the spaCy model from the path where you uploaded it
-nlp = spacy.load('./en_core_web_sm')  # Ensure this points to the folder containing your model files
+# Define the path to the spaCy model
+model_directory = './en_core_web_sm/en_core_web_sm-3.8.0'
+
+# Check if the config.cfg exists in the expected location
+config_file_path = os.path.join(model_directory, "config.cfg")
+if not os.path.exists(config_file_path):
+    raise FileNotFoundError(f"config.cfg not found in {model_directory}")
+
+# Load the spaCy model from the specified directory
+nlp = spacy.load(model_directory)
 
 # Initialize Whisper model
 model = whisper.load_model("base")
@@ -132,5 +140,4 @@ st.markdown("""
 
 Feel free to test it out with different video links!
 """)
-
 
