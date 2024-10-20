@@ -24,7 +24,7 @@ if not os.path.exists(config_file_path):
 nlp = spacy.load(model_directory)
 
 # Initialize Whisper model
-model = whisper.load_model("base")
+model = whisper.load_model("tiny")
 
 # Stopwords for summarization
 stopwords = list(STOP_WORDS)
