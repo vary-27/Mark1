@@ -1,3 +1,4 @@
+spacy.cli.download("en_core_web_sm")
 import streamlit as st
 import warnings
 import yt_dlp
@@ -11,7 +12,7 @@ import numpy as np
 import pandas as pd
 
 import spacy.cli
-spacy.cli.download("en_core_web_sm")
+
 
 # Suppress specific warnings
 warnings.filterwarnings("ignore", category=UserWarning)
